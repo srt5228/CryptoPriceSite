@@ -1,0 +1,28 @@
+{
+  "name": "cryptopricesite",
+  "version": "1.0.0",
+  "description": "A site that displays current prices of ETH and BTC from multiple exchanges",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srt5228/CryptoPriceSite.git"
+  },
+  "keywords": [
+    "ETH",
+    "BTC",
+    "cryptocurrency"
+  ],
+  "author": "Scottie Thompson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/srt5228/CryptoPriceSite/issues"
+  },
+  "homepage": "https://github.com/srt5228/CryptoPriceSite#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
