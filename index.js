@@ -8,6 +8,8 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // API ENDPOINTS - all will be under /api
 
+
+
 // Any request that doesn't match anything above will be redirected to React homepage
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname+'/client/build/index.html'));

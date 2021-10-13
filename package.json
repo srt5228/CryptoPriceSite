@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/srt5228/CryptoPriceSite#readme",
   "dependencies": {
+    "create-react-app": "^4.0.3",
     "express": "^4.17.1"
   }
 }
