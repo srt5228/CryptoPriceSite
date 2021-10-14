@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('/api/coinbase/BTC', (req, res) => {
     axios.get('https://api.coinbase.com/v2/prices/BTC-USD/buy')
         .then(data => {
-            res.status(200).json(data.data)
+            res.status(200).json(data.data.data)
         })
 })
 
