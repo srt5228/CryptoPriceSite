@@ -17,7 +17,7 @@ app.get('/api/coinbase/BTC', (req, res) => {
 
 
 // Any request that doesn't match anything above will be redirected to React homepage
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 

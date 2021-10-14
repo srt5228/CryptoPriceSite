@@ -11,13 +11,12 @@ function Dashboard() {
         axios.get("/api/coinbase/BTC")
             .then(res => {
                 setBuyBtcCoin(res.data)
+                console.log(buyBtcCoin)
             });
-
     })
-
     return (
         <h1>{buyBtcCoin}</h1>
     )
-};
+}
 
 export default Dashboard;
