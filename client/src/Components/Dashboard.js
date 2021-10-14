@@ -1,21 +1,17 @@
-import React, {useState, useEffect} from "react";
-import axios from "axios";
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import CoinBasePrices from "./CoinBasePrices";
+import KrakenBasePrices from "./KrakenPrices";
+import BinancePrices from "./BinancePrices";
 
 function Dashboard() {
-    // Setting state - current prices from different exchanges
-    const [buyBtcCoin, setBuyBtcCoin] = useState();
 
-    // Hook to autorun our initial api hits and get our prices from
-    // COINBASE
-    useEffect(() => {
-        axios.get("/api/coinbase/BTC")
-            .then(res => {
-                setBuyBtcCoin(res.data)
-                console.log(buyBtcCoin)
-            });
-    })
     return (
-        <h1>{buyBtcCoin}</h1>
+        <>
+            <CoinBasePrices/>
+            <KrakenBasePrices/>
+            <BinancePrices/>
+        </>
     )
 }
 

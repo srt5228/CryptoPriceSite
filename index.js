@@ -9,9 +9,23 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // API ENDPOINTS - all will be under /api
 app.get('/api/coinbase/BTC', (req, res) => {
-    axios.get('https://api.coinbase.com/v2/prices/BTC-USD/buy')
+    axios.get('https://api.exchange.coinbase.com/products/BTC-USD/ticker')
         .then(data => {
-            res.status(200).json(data.data.data)
+            res.status(200).json(data.data.bid)
+        })
+})
+
+app.get('/api/kraken/BTC', (req, res) => {
+    axios.get('https://api.kraken.com/0/public/Spread?pair=XBTUSD')
+        .then(data => {
+            res.status(200).json(data.data.result.XXBTZUSD)
+        })
+})
+
+app.get('/api/binance/BTC', (req, res) => {
+    axios.get('https://api.binance.com/api/v3/ticker/bookTicker?symbol=BTCUSDT')
+        .then(data => {
+            res.status(200).json(data.data)
         })
 })
 

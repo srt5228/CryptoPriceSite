@@ -1,38 +1,122 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+body {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  text-align: center;
+  color: white;
+  font-family: Corbel;
+  font-size: 25px;
+  margin: auto;
+  padding: 25px;
+}
+
+a {
+  width: 15%;
+  display: block;
+  color: cadetblue;
+  border: 2px solid #B0C4DE;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 18px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+a:hover {
+  background-color: #B0C4DE;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+legend {
+  text-align: left;
+  font-family: Bahnschrift;
+  font-size: 19px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+label {
+  font-size: 22px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+input {
+  font-family: Corbel;
+  font-size: 19px;
+  width: 10%;
+  text-align: center;
+}
+
+button {
+  background-color: #282c34;
+  font-family: Corbel;
+  font-size: 20px;
+  margin-top: 12px;
+  color: white;
+  border: 2px solid #B0C4DE;
+}
+
+button:hover {
+  background-color: #B0C4DE;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 90%;
+  max-width: 95%;
+  white-space: nowrap;
+  background-color: white;
+  color: black;
+  user-select: none;
+}
+
+caption {
+  font-size: 35px;
+  font-weight: bold;
+  margin: 10px;
+  color: white;
+  text-align: center;
+}
+
+td, th {
+  text-align: center;
+  padding: 8px;
+}
+
+td {
+  border-right: 1px solid #f8f8f8;
+  font-size: 15px;
+}
+
+th {
+  background: #B0C4DE;
+  font-size: 20px;
+}
+
+form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+fieldset {
+  border: lightslategray solid 2px;
+  border-radius: 10px;
+}
+
+Link {
+  margin-top: 20px;
+}
+
+table td input {
+  width: 50%;
 }
