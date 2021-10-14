@@ -18,4 +18,6 @@ function Dashboard() {
     return (
         <h1>{buyBtcCoin}</h1>
     )
-}
+};
+
+export default Dashboard;
