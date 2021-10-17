@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import CoinBasePrices from "./CoinBasePrices";
-import KrakenBasePrices from "./KrakenPrices";
+import KrakenPrices from "./KrakenPrices";
 import BinancePrices from "./BinancePrices";
 import socketIOClient from "socket.io-client";
 
@@ -15,7 +15,7 @@ function Dashboard() {
     return (
         <>
             <CoinBasePrices/>
-            {/*<KrakenBasePrices/>*/}
+            <KrakenPrices/>
             {/*<BinancePrices/>*/}
         </>
     )

@@ -12,8 +12,8 @@ function CoinBasePrices() {
             // Initial API hit on page load
             axios.get("/api/coinbase/realtime")
                 .then(res => {
-                    let eth = {buy: res.data.coinbaseRealtimeETH.bid, sell: res.data.coinbaseRealtimeETH.ask}
-                    let btc = {buy: res.data.coinbaseRealtimeBTC.bid, sell: res.data.coinbaseRealtimeBTC.ask}
+                    let eth = {buy: res.data.coinbaseRealTimeETH.bid, sell: res.data.coinbaseRealTimeETH.ask}
+                    let btc = {buy: res.data.coinbaseRealTimeBTC.bid, sell: res.data.coinbaseRealTimeBTC.ask}
                     setBtcData(btc)
                     setEthData(eth)
                 });
@@ -22,12 +22,12 @@ function CoinBasePrices() {
             const interval = setInterval(() => {
                 axios.get("/api/coinbase/realtime")
                     .then(res => {
-                        let eth = {buy: res.data.coinbaseRealtimeETH.bid, sell: res.data.coinbaseRealtimeETH.ask}
-                        let btc = {buy: res.data.coinbaseRealtimeBTC.bid, sell: res.data.coinbaseRealtimeBTC.ask}
+                        let eth = {buy: res.data.coinbaseRealTimeETH.bid, sell: res.data.coinbaseRealTimeETH.ask}
+                        let btc = {buy: res.data.coinbaseRealTimeBTC.bid, sell: res.data.coinbaseRealTimeBTC.ask}
                         setBtcData(btc)
                         setEthData(eth)
                     });
-            }, 1000);
+            }, 2000);
             // cleanup our interval
             return () => clearInterval(interval);
         }, [])

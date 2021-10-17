@@ -1,34 +1,39 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-function KrakenBasePrices() {
+function KrakenPrices() {
     // Setting state - current prices from different exchanges
-    const [buyBtcKraken, setBuyBtcKraken] = useState();
+    const [btcData, setBtcData] = useState({buy: 0, sell: 0});
+    const [ethData, setEthData] = useState({buy: 0, sell: 0});
 
     // Hook to autorun our initial api hits and get our prices from
     // COINBASE - KRAKEN -
     useEffect(() => {
-        axios.get("/api/kraken/BTC")
+        // Initial API hit on page load
+        axios.get("/api/kraken/realtime")
             .then(res => {
-                let btcData = parseFloat(res.data[0][1]).toFixed(2);
-                setBuyBtcKraken(btcData)
+                setBtcData({buy: res.data.krakenRealTimeBTC.bid, sell: res.data.krakenRealTimeBTC.ask})
+                setEthData({buy: res.data.krakenRealTimeETH.bid, sell: res.data.krakenRealTimeETH.ask})
             });
+        // Hit API every second - this pulls data being gathered from coinbase websocket feed
+        // 1 second seemed like the proper balance for rendering accuracy
         const interval = setInterval(() => {
-            axios.get("/api/kraken/BTC")
+            axios.get("/api/kraken/realtime")
                 .then(res => {
-                    let btcData = parseFloat(res.data[0][1]).toFixed(2);
-                    setBuyBtcKraken(btcData)
+                    setBtcData({buy: res.data.krakenRealTimeBTC.bid, sell: res.data.krakenRealTimeBTC.ask})
+                    setEthData({buy: res.data.krakenRealTimeETH.bid, sell: res.data.krakenRealTimeETH.ask})
                 });
-        }, 10000);
+        }, 2000);
+        // cleanup our interval
         return () => clearInterval(interval);
     }, [])
 
     return (
         <>
-            <h1>Kraken: {buyBtcKraken}</h1>
-
+            <h1>Kraken BTC BUY {btcData.buy} SELL {btcData.sell}</h1>
+            <h1>Kraken  ETH BUY {ethData.buy} SELL {ethData.sell}</h1>
         </>
     )
 }
 
-export default KrakenBasePrices;
+export default KrakenPrices;
