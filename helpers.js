@@ -1,15 +1,16 @@
+// Filters out unnecessary string characters to identify
+// what crypto we are working with pair - crypto pair
+exports.nameCheck = (pair, exchange) => {
+    if (exchange === "coinbase") {
+        return pair.replace(/-USD/i, '')
+    } else if (exchange === "kraken") {
+        return pair.replace(/\/USD/i, '') === "XBT" ? "BTC" : "ETH"
+    } else if (exchange === "binance") {
+        return pair.replace(/USDT/i, '')
+    }
 
-// COINBASE HELPERS
-// Checks what coin pair we are setting up in order to pass
-// Correct data object for front end transmission ex (ETH-USD)
-exports.coinBaseNameCheck = (pair) => {
-    if (pair === "ETH-USD") {
-        return "ETH"
-    } else if (pair === "BTC-USD") {
-        return "BTC"
-    };
-    return "Bad Coin Pair Value"
-};
+}
+
 // Checks whether the incoming message is an initial snapshot
 // from Level 2 book feed or an update and modifies passed object
 // accordingly
@@ -28,21 +29,10 @@ exports.coinAssignValues = (payload, dataObject) => {
     };
 };
 
-// KRAKEN HELPERS
-// Checks the coin pair we are setting up in order
-// to pass correct data object for front end transmission ex (ETH/USD)
-exports.krakenNameCheck = (pair) => {
-    if (pair === "ETH/USD") {
-        return "ETH"
-    } else if (pair === "XBT/USD") {
-        return "BTC"
-    };
-    return "Bad Coin Pair Value"
-};
 // Checks whether the incoming message is snapshot or
 // update from book feed and modifies passed dataObject accordingly
 // payload - websocket feed data dataObject - front end data object
-exports.krakenAssignValues = (payload, dataObject, datatypes) => {
+exports.krakenAssignValues = (payload, dataObject) => {
     if ('as' in payload) {
         dataObject.ask = parseFloat(payload.as[0][0]).toFixed(2)
     };
@@ -57,5 +47,11 @@ exports.krakenAssignValues = (payload, dataObject, datatypes) => {
         dataObject.bid = parseFloat(payload.b[0][0]).toFixed(2)
     };
 };
+
+// Updates passed front end payload with current book data from binance
+exports.binanceAssignValues = (payload, dataObject) => {
+    dataObject.ask = parseFloat(payload.a).toFixed(2)
+    dataObject.bid = parseFloat(payload.b).toFixed(2)
+}
 
 

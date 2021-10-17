@@ -18,32 +18,14 @@ let krakenRealTimeBTC = {bid: null, ask:null}
 let krakenRealTimeETH = {bid: null, ask: null}
 ws.buildKrakenWebSocket(krakenRealTimeBTC, krakenRealTimeETH)
 console.log("Kraken Websocket Feed Online")
-
-
-
-// WebSocket conection to Binance
-// const binanceWebSocket = new WebSocket('wss://stream.binance.com:9443')
-
-// Setting up streams by sending subscription messages to each provider
-
-// binanceWebSocket.on('open', function open() {
-//     const message = {
-//         "method": "subscribe",
-//         "params": [
-//
-//         ],
-//         "id": 1
-//     }
-// })
-
-
-
-
-
+// Websocket connection to Binance
+let binanceRealTimeBTC = {bid: null, ask:null}
+let binanceRealTimeETH = {bid: null, ask: null}
+ws.buildBinanceWebsocket(binanceRealTimeBTC, binanceRealTimeETH)
+console.log("Binance Feed Online")
 
 // Serving static files from React app
 app.use(express.static(path.join(__dirname, 'client/build')));
-// app.use(cors());
 
 
 // API ENDPOINTS - all will be under /api
@@ -55,14 +37,9 @@ app.get('/api/kraken/realtime', (req, res) => {
     res.status(200).send({krakenRealTimeBTC, krakenRealTimeETH})
 })
 
-
-app.get('/api/binance/BTC', (req, res) => {
-    axios.get('https://api.binance.com/api/v3/ticker/bookTicker?symbol=BTCUSDT')
-        .then(data => {
-            res.status(200).json(data.data)
-        })
+app.get('/api/binance/realtime', (req, res) => {
+    res.status(200).send({binanceRealTimeBTC, binanceRealTimeETH})
 })
-
 
 // Any request that doesn't match anything above will be redirected to React homepage
 app.get('/', (req, res) => {
@@ -86,5 +63,11 @@ app.get('/', (req, res) => {
 //     axios.get('https://api.kraken.com/0/public/Spread?pair=XBTUSD')
 //         .then(data => {
 //             res.status(200).json(data.data.result.XXBTZUSD)
+//         })
+// })
+// app.get('/api/binance/BTC', (req, res) => {
+//     axios.get('https://api.binance.com/api/v3/ticker/bookTicker?symbol=BTCUSDT')
+//         .then(data => {
+//             res.status(200).json(data.data)
 //         })
 // })
