@@ -41,6 +41,14 @@ app.get('/api/binance/realtime', (req, res) => {
     res.status(200).send({binanceRealTimeBTC, binanceRealTimeETH})
 })
 
+// main endpoint - sends all data objects combined for each exchange with array of values for [BTC, ETH]
+app.get('/api/realtime', (req, res) => {
+    res.status(200).send(
+        {coinbase: [coinbaseRealTimeBTC, coinbaseRealTimeETH],
+                kraken: [krakenRealTimeBTC, krakenRealTimeETH],
+                binance: [binanceRealTimeBTC, binanceRealTimeETH]}
+    );
+})
 // Any request that doesn't match anything above will be redirected to React homepage
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
