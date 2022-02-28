@@ -6,7 +6,7 @@ const app = express();
 const ws = require("./websocketfactory.js");
 // Set up our http server for serving react app
 const server = http.createServer(app);
-server.listen(5000)
+server.listen(process.env.PORT || 5000)
 
 // WebSocket connection to Coinbase
 let coinbaseRealTimeBTC = {bid: 0, ask: 0}
