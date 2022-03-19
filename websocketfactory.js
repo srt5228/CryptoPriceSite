@@ -11,7 +11,6 @@ function buildWebSocket(url) {
 // Sending Subscription Payload/Setting data payloads for react frontend
 // Handling errors in websocket connection and reopening closed connections
 
-
 // COINBASE WEBSOCKET INTERFACE
 // Takes in object reference for front end data payloads
 exports.buildCoinBaseWebSocket = (btcData, ethData) => {

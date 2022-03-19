@@ -1,7 +1,14 @@
 * {
   box-sizing: border-box;
 }
+.weather {
+  color: darkgrey;
+  font-size: 10px;
+  display: inline-block;
+}
+
 body {
+  min-height: 100vh;
   background-color: #282c34;
   text-align: center;
   color: white;

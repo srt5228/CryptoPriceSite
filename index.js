@@ -6,6 +6,7 @@ const app = express();
 const ws = require("./websocketfactory.js");
 // Set up our http server for serving react app
 const server = http.createServer(app);
+const {spawn} = require('child_process');
 server.listen(process.env.PORT || 5000)
 
 // WebSocket connection to Coinbase
@@ -49,6 +50,22 @@ app.get('/api/realtime', (req, res) => {
                 binance: [binanceRealTimeBTC, binanceRealTimeETH]}
     );
 })
+
+// Endpoint for teammates weather service
+app.get('/api/weather', (req, res) => {
+    console.log('You hit weather')
+    // spawn new child process to call the python script
+    const python = spawn('python', ['../CS361_Microservice-main/weather microservice.py']);
+    // collect data from script
+    python.stdout.on('data', function (data) {
+        console.log('Pipe data from python script ...');
+        let dataToSend = data.toString();
+        console.log(dataToSend)
+        res.status(200).send(
+            {weather: dataToSend});
+    });
+
+})
 // Any request that doesn't match anything above will be redirected to React homepage
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
@@ -56,26 +73,3 @@ app.get('/', (req, res) => {
 
 
 
-
-
-
-
-// OLD ENDPOINTS
-// app.get('/api/coinbase/BTC', (req, res) => {
-//     axios.get('https://api.exchange.coinbase.com/products/BTC-USD/ticker')
-//         .then(data => {
-//             res.status(200).json(data.data.bid)
-//         })
-// })
-// app.get('/api/kraken/BTC', (req, res) => {
-//     axios.get('https://api.kraken.com/0/public/Spread?pair=XBTUSD')
-//         .then(data => {
-//             res.status(200).json(data.data.result.XXBTZUSD)
-//         })
-// })
-// app.get('/api/binance/BTC', (req, res) => {
-//     axios.get('https://api.binance.com/api/v3/ticker/bookTicker?symbol=BTCUSDT')
-//         .then(data => {
-//             res.status(200).json(data.data)
-//         })
-// })
